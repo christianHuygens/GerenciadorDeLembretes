@@ -7,7 +7,7 @@ public class GerenciadorDeLembretes {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		Calendar data = Calendar.getInstance();
+		Calendar calendario = Calendar.getInstance();
 		int op;
 		int numLog = 0;
 		String entradaL, entradaS;
@@ -48,37 +48,62 @@ public class GerenciadorDeLembretes {
 												System.out.println("Este lembrete possui data de expiração?\n(Digite '1' se houver ou '2' se não houver)");
 												op = sc.nextInt();
 												if (op == 1){
-													System.out.println("Digite o título da tarefa:");
+													System.out.println("Digite o título da tarefa: ");
 													String titulo = sc.next();
-													System.out.println("Digite o data de expiração dessa tarefa:");
-													System.out.print("Dia:");
+													System.out.println("Digite o data de expiração dessa tarefa (em número): ");
+													System.out.print("Dia: ");
 													int dia = sc.nextInt();
-													System.out.print("Mês:");
+													System.out.print("Mês: ");
 													int mes = sc.nextInt();
-													System.out.print("Ano:");
+													System.out.print("Ano: ");
 													int ano = sc.nextInt();
-													Date expData = data.set(ano, mes, dia);
-													System.out.print("Digite a descrição dessa tarefa?(Ou digite 'n' caso não haja descrição)");
+													calendario.set(ano, (mes-1), dia); // (mes-1) pq o metodo set recebe os meses de 0 a 11 (jan .. dez)
+													Date expData = calendario.getTime();
+													System.out.println("Digite a descrição dessa tarefa (Ou digite 'n' caso não haja descrição): ");
 													String descricao =  sc.next();
-													System.out.print("Digite um local para essa tarefa?(Ou digite 'n' caso não haja local)");
+													System.out.println("Digite um local para essa tarefa (Ou digite 'n' caso não haja local): ");
 													String local =  sc.next();
-													System.out.print("Digite ums tag para essa tarefa?");
+													System.out.println("Digite ums tag para essa tarefa: ");
 													String tag =  sc.next();
 													
-													if (!descricao.equals('n') && !local.equals('n')){
-														Tarefa tarefa = new Tarefa(titulo, expData, tag, descricao, local);
-													}else if (descricao.equals('n') && !local.equals('n')){
-														Tarefa tarefa = new Tarefa(titulo, expData, tag, local);
-													}else if (!descricao.equals('n') && local.equals('n')){
-														Tarefa tarefa = new Tarefa(titulo, expData, tag, descricao);
-													}else if (descricao.equals('n') && local.equals('n')){
-														Tarefa tarefa = new Tarefa(titulo, expData, tag);
+													if (!descricao.equals("n") && !local.equals("n")){
+														Lembretes tarefa = new Tarefa(titulo, expData, tag, descricao, local);
+														System.out.println("titulo, expData, tag, descricao, local"); // Para testar os ifs
+													}else if (descricao.equals("n") && !local.equals("n")){
+														Lembretes tarefa = new Tarefa(titulo, expData, tag, local);
+														System.out.println("titulo, expData, tag, local"); // Para testar os ifs
+													}else if (!descricao.equals("n") && local.equals("n")){
+														Lembretes tarefa = new Tarefa(titulo, expData, tag, descricao);
+														System.out.println("titulo, expData, tag, descricao"); // Para testar os ifs
+													}else if (descricao.equals("n") && local.equals("n")){
+														Lembretes tarefa = new Tarefa(titulo, expData, tag);
+														System.out.println("titulo, expData, tag"); // Para testar os ifs
 													}
 													//arrayDeListas[i] = tarefa;
 													
 												}else if(op == 2){
-													System.out.println("Digite o título da nota:");
+													System.out.println("Digite o título da tarefa:");
 													String titulo = sc.next();
+													System.out.println("Digite a descrição dessa tarefa (Ou digite 'n' caso não haja descrição): ");
+													String descricao = sc.next();
+													System.out.println("Digite um local para essa tarefa (Ou digite 'n' caso não haja local): ");
+													String local = sc.next();
+													System.out.println("Digite ums tag para essa tarefa: ");
+													String tag = sc.next();
+													if (!descricao.equals("n") && !local.equals("n")){
+														Lembretes nota = new Nota(titulo, tag, descricao, local);
+														System.out.println("titulo, tag, descricao, local"); // Para testar os ifs
+													}else if (descricao.equals("n") && !local.equals("n")){
+														Lembretes nota = new Nota(titulo, tag, local);
+														System.out.println("titulo, tag, local"); // Para testar os ifs
+													}else if (!descricao.equals("n") && local.equals("n")){
+														Lembretes nota = new Nota(titulo, tag, descricao);
+														System.out.println("titulo, tag, descricao"); // Para testar os ifs
+													}else if (descricao.equals("n") && local.equals("n")){
+														Lembretes nota = new Nota(titulo, tag);
+														System.out.println("titulo, tag"); // Para testar os ifs
+													}
+													//arrayDeListas[i] = nota;
 												}
 												break;
 												
