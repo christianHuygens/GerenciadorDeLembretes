@@ -1,4 +1,0 @@
-GerenciadorDeLembretes
-======================
-
-Gerenciador De Lembretes
