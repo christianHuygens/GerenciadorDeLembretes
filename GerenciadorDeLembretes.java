@@ -1,10 +1,13 @@
 package ifrn.poo.projetoLembretes;
 import java.util.Scanner;
+import java.util.Date;
+import java.util.Calendar;
 
 public class GerenciadorDeLembretes {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		Calendar data = Calendar.getInstance();
 		int op;
 		int numLog = 0;
 		String entradaL, entradaS;
@@ -42,7 +45,41 @@ public class GerenciadorDeLembretes {
 											op = sc.nextInt();
 											switch (op) {
 											case 1:
-												
+												System.out.println("Este lembrete possui data de expiração?\n(Digite '1' se houver ou '2' se não houver)");
+												op = sc.nextInt();
+												if (op == 1){
+													System.out.println("Digite o título da tarefa:");
+													String titulo = sc.next();
+													System.out.println("Digite o data de expiração dessa tarefa:");
+													System.out.print("Dia:");
+													int dia = sc.nextInt();
+													System.out.print("Mês:");
+													int mes = sc.nextInt();
+													System.out.print("Ano:");
+													int ano = sc.nextInt();
+													Date expData = data.set(ano, mes, dia);
+													System.out.print("Digite a descrição dessa tarefa?(Ou digite 'n' caso não haja descrição)");
+													String descricao =  sc.next();
+													System.out.print("Digite um local para essa tarefa?(Ou digite 'n' caso não haja local)");
+													String local =  sc.next();
+													System.out.print("Digite ums tag para essa tarefa?");
+													String tag =  sc.next();
+													
+													if (!descricao.equals('n') && !local.equals('n')){
+														Tarefa tarefa = new Tarefa(titulo, expData, tag, descricao, local);
+													}else if (descricao.equals('n') && !local.equals('n')){
+														Tarefa tarefa = new Tarefa(titulo, expData, tag, local);
+													}else if (!descricao.equals('n') && local.equals('n')){
+														Tarefa tarefa = new Tarefa(titulo, expData, tag, descricao);
+													}else if (descricao.equals('n') && local.equals('n')){
+														Tarefa tarefa = new Tarefa(titulo, expData, tag);
+													}
+													//arrayDeListas[i] = tarefa;
+													
+												}else if(op == 2){
+													System.out.println("Digite o título da nota:");
+													String titulo = sc.next();
+												}
 												break;
 												
 											case 2:
