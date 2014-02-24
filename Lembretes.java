@@ -1,44 +1,29 @@
 package ifrn.poo.projetoLembretes;
 import java.util.Date;
 
-public abstract class Lembretes {
+public class Lembretes extends Notas {
 
-	protected String titulo;
-	protected String descricao;
-	protected Date dataCriação;
-	protected String tag;
-	protected String local;
-	
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
+	public Lembretes (String titulo, String tag){
 		this.titulo = titulo;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public Date getDataCriação() {
-		return dataCriação;
-	}
-	public void setDataCriação(Date dataCriação) {
-		this.dataCriação = dataCriação;
-	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
 		this.tag = tag;
+		this.dataCriação = new Date();
 	}
-	public String getLocal() {
-		return local;
+	
+	public Lembretes (String titulo, String tag, String descricao){
+		this.titulo = titulo;
+		this.tag = tag;
+		this. descricao = descricao;
+		this.dataCriação = new Date();
 	}
-	public void setLocal(String local) {
-		this.local = local;
+	
+	public Lembretes (String titulo, String tag, String descricao, String local){
+		this.titulo = titulo;
+		this.tag = tag;
+		this. descricao = descricao;
+		this. local = local;
+		this.dataCriação = new Date();
 	}
+	
 	
 	
 }
