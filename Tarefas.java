@@ -1,18 +1,18 @@
 package ifrn.poo.projetoLembretes;
 import java.util.Date;
 
-public class Tarefa extends Lembretes {
+public class Tarefas extends Notas {
 
 	private Date expData;
 
-	public Tarefa (String titulo, Date expData, String tag){
+	public Tarefas (String titulo, Date expData, String tag){
 		this.titulo = titulo;
 		this.expData = expData;
 		this.tag = tag;
 		this.dataCriação = new Date();
 	}
 	
-	public Tarefa (String titulo, Date expData, String tag, String descricao){
+	public Tarefas (String titulo, Date expData, String tag, String descricao){
 		this.titulo = titulo;
 		this.expData = expData;
 		this.descricao = descricao;
@@ -20,7 +20,7 @@ public class Tarefa extends Lembretes {
 		this.dataCriação = new Date();
 	}
 	
-	public Tarefa (String titulo, Date expData, String tag, String descricao, String local){
+	public Tarefas (String titulo, Date expData, String tag, String descricao, String local){
 		this.titulo = titulo;
 		this.expData = expData;
 		this.descricao = descricao;
