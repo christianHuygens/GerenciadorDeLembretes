@@ -105,7 +105,7 @@ public class GerenciadorDeLembretes {
 														System.out.println("titulo, tag"); // Para testar os ifs
 													}
 													//arrayDeListas[i].vectorDeLembretes[numeroDeLembretes] = nota;
-													///numeroDeLembretes++
+													//numeroDeLembretes++
 												}
 												break;
 												
