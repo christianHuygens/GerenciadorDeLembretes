@@ -67,16 +67,16 @@ public class GerenciadorDeLembretes {
 													String tag =  sc.next();
 													
 													if (!descricao.equals("n") && !local.equals("n")){
-														Lembretes tarefa = new Tarefa(titulo, expData, tag, descricao, local);
+														Notas tarefa = new Tarefas(titulo, expData, tag, descricao, local);
 														System.out.println("titulo, expData, tag, descricao, local"); // Para testar os ifs
 													}else if (descricao.equals("n") && !local.equals("n")){
-														Lembretes tarefa = new Tarefa(titulo, expData, tag, local);
+														Notas tarefa = new Tarefas(titulo, expData, tag, local);
 														System.out.println("titulo, expData, tag, local"); // Para testar os ifs
 													}else if (!descricao.equals("n") && local.equals("n")){
-														Lembretes tarefa = new Tarefa(titulo, expData, tag, descricao);
+														Notas tarefa = new Tarefas(titulo, expData, tag, descricao);
 														System.out.println("titulo, expData, tag, descricao"); // Para testar os ifs
 													}else if (descricao.equals("n") && local.equals("n")){
-														Lembretes tarefa = new Tarefa(titulo, expData, tag);
+														Notas tarefa = new Tarefas(titulo, expData, tag);
 														System.out.println("titulo, expData, tag"); // Para testar os ifs
 													}
 													//arrayDeListas[i].vectorDeLembretes[numeroDeLembretes] = nota;
@@ -92,16 +92,16 @@ public class GerenciadorDeLembretes {
 													System.out.println("Digite ums tag para essa tarefa: ");
 													String tag = sc.next();
 													if (!descricao.equals("n") && !local.equals("n")){
-														Lembretes nota = new Nota(titulo, tag, descricao, local);
+														Notas lembrete = new Lembretes(titulo, tag, descricao, local);
 														System.out.println("titulo, tag, descricao, local"); // Para testar os ifs
 													}else if (descricao.equals("n") && !local.equals("n")){
-														Lembretes nota = new Nota(titulo, tag, local);
+														Notas lembrete = new Lembretes(titulo, tag, local);
 														System.out.println("titulo, tag, local"); // Para testar os ifs
 													}else if (!descricao.equals("n") && local.equals("n")){
-														Lembretes nota = new Nota(titulo, tag, descricao);
+														Notas lembrete = new Lembretes(titulo, tag, descricao);
 														System.out.println("titulo, tag, descricao"); // Para testar os ifs
 													}else if (descricao.equals("n") && local.equals("n")){
-														Lembretes nota = new Nota(titulo, tag);
+														Notas lembrete = new Lembretes(titulo, tag);
 														System.out.println("titulo, tag"); // Para testar os ifs
 													}
 													//arrayDeListas[i].vectorDeLembretes[numeroDeLembretes] = nota;
