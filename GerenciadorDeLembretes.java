@@ -79,7 +79,8 @@ public class GerenciadorDeLembretes {
 														Lembretes tarefa = new Tarefa(titulo, expData, tag);
 														System.out.println("titulo, expData, tag"); // Para testar os ifs
 													}
-													//arrayDeListas[i] = tarefa;
+													//arrayDeListas[i].vectorDeLembretes[numeroDeLembretes] = nota;
+													//numeroDeLembretes++
 													
 												}else if(op == 2){
 													System.out.println("Digite o título da tarefa:");
@@ -103,7 +104,8 @@ public class GerenciadorDeLembretes {
 														Lembretes nota = new Nota(titulo, tag);
 														System.out.println("titulo, tag"); // Para testar os ifs
 													}
-													//arrayDeListas[i] = nota;
+													//arrayDeListas[i].vectorDeLembretes[numeroDeLembretes] = nota;
+													//numeroDeLembretes++
 												}
 												break;
 												
