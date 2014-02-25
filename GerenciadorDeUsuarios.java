@@ -33,7 +33,7 @@ public class GerenciadorDeUsuarios {
 		Usuario usuario = null;
 		for (Usuario u : usuarios)
 			if (u.getLogin().equals(entradaL) && !u.getSenha().equals(entradaS) || !u.getLogin().equals(entradaL)){
-				throw new UsuarioSenhaErradoException(); // Não está lancando a Exception
+				throw new UsuarioSenhaErradoException(); // Não está lançando a Exception
 			}else{
 					usuario = u;
 					System.out.println("Usuário encontrado.\n---------------------------");
@@ -41,7 +41,17 @@ public class GerenciadorDeUsuarios {
 		return usuario;
 	}
 
+	
+	public void deletarUsuario(Usuario user){
+		for (Usuario u : usuarios)
+			if (u.getLogin().equals(user.getLogin())){
+				usuarios.remove(u); // Não funcionou.
+			}						
+		System.out.println("Usuário "+user.getLogin()+" removido com sucesso.\n---------------------------");
+	}
+	
 }
+
 
 //
 // public String getLogin(int usuario) {
