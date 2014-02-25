@@ -33,7 +33,7 @@ public class GerenciadorDeLembretes {
 				break;
 				
 			case 2:
-				user = this.cadastrarUsuario();
+				this.cadastrarUsuario();
 				break;
 
 			default:
