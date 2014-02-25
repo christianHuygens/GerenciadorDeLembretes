@@ -3,9 +3,9 @@ package ifrn.poo.projetoLembretes;
 import ifrn.poo.excecao.UsuarioExistenteException;
 import ifrn.poo.excecao.UsuarioSenhaErradoException;
 
-import java.lang.invoke.SwitchPoint;
+//import java.lang.invoke.SwitchPoint;
 import java.util.Scanner;
-import java.util.Date;
+//import java.util.Date;
 import java.util.Calendar;
 
 public class GerenciadorDeLembretes {
@@ -20,7 +20,7 @@ public class GerenciadorDeLembretes {
 	int numLog = 0;
 	String entradaL, entradaS;
 	
-		public void iniciar() {
+	public void iniciar() {
 		
 		System.out.println("BEM VINDO AO GERENCIADOR DE LEMBRETES!");
 		while (true) {
@@ -46,32 +46,37 @@ public class GerenciadorDeLembretes {
 			
 			
 			private Usuario autenticar(){
-				while(true){
-					try {
-						System.out.println("Digite seu login (ou digite 'n' para sair):");
-						entradaL = sc.next();
-						if (entradaL.equals('n'))
-							return null; // se retornar null, tem que voltar para o menu inicial.
-						
-						System.out.println("Digite a sua senha:");
-						entradaS = sc.next();
-						user = gu.autenticar(entradaL, entradaS);
-						System.out.println("Usuário encontrado.\n---------------------------");
-						return user;
-					}catch (UsuarioSenhaErradoException e) {
-						e.getMsg();
+				if(!gu.isEmpty()){
+					while(true){
+						try {
+							System.out.println("Digite seu login (ou digite 'n' para sair):");
+							entradaL = sc.next();
+							if (entradaL.equals('n')){
+								return null; // se retornar null, tem que voltar para o menu inicial.
+							}
+							System.out.println("Digite a sua senha:");
+							entradaS = sc.next();
+							user = gu.autenticar(entradaL, entradaS);
+							System.out.println("Usuário encontrado.\n---------------------------");
+							return user;
+						}catch (UsuarioSenhaErradoException e) {
+							e.getMsg();
+						}
 					}
+				}else{
+					System.out.println("Não há usuários cadastrados.\n---------------------------");
+					return null;
 				}
 			}
 		
-				private void cadastrarUsuario(){
+		private void cadastrarUsuario(){
 			if (numLog < 51) {
 				boolean criou = false;
 				while(!criou){
 					try {
 						System.out.println("Digite o login que deseja utilizar:");
 						entradaL = sc.next();
-						if (gu.checarNomes(entradaL)) {
+						if (!gu.checarNomes(entradaL)) {
 							System.out.println("Digite a sua senha:");
 							entradaS = sc.next();
 							novoUsuario = new Usuario(entradaL, entradaS);
