@@ -64,7 +64,7 @@ public class GerenciadorDeLembretes {
 				}
 			}
 		
-		private Usuario cadastrarUsuario(){
+				private void cadastrarUsuario(){
 			if (numLog < 51) {
 				boolean criou = false;
 				while(!criou){
@@ -79,15 +79,14 @@ public class GerenciadorDeLembretes {
 							gu.cadastrar(novoUsuario);
 						}
 						criou = true;
-						return novoUsuario;
+						numLog++;
 					} catch (UsuarioExistenteException e) {
 						e.getMsg();
 					}
 				}
-				numLog++;
+
 			} else {
 				System.out.println("Não há mais espaço para usuários nesse aplicativo. Delete algum usuário para continuar.");
-				return null;
 			}
 		}
 			
