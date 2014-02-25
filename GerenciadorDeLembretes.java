@@ -30,6 +30,9 @@ public class GerenciadorDeLembretes {
 			switch (op) {
 			case 1:
 				user = this.autenticar();
+				if (user != null){
+					paginaInicial(user);
+				}
 				break;
 				
 			case 2:
@@ -43,8 +46,26 @@ public class GerenciadorDeLembretes {
 	}
 			
 			
+	private void paginaInicial(Usuario user){
+		System.out.println("Olá "+ user.getLogin() + ".\nEsses são todos os seus lembretes.");
+		// Imprima todos os lembretes do usuário
+		System.out.println("Digite o número do lembrete para visualizar seus detalhes.\nOu digite '0' para acessar outras funções:");
+		op = sc.nextInt();
+		if (op == 0){
+			this.menu();
+		}
+		
+	}
 			
 			
+			private void menu() {
+				System.out.println("MENU:\nDigite o numero da operação de deseja realizar:\n 1 - Inserir lembrete;\n 2 - Pesquisar por dia;\n 3 - Pesquisar por mês;\n 4 - Deletar usuário;\n 5 - Fazer logout.");
+				op = sc.nextInt();
+
+		
+	}
+
+
 			private Usuario autenticar(){
 				if(!gu.isEmpty()){
 					while(true){
@@ -56,11 +77,10 @@ public class GerenciadorDeLembretes {
 							}
 							System.out.println("Digite a sua senha:");
 							entradaS = sc.next();
-							user = gu.autenticar(entradaL, entradaS);
-							System.out.println("Usuário encontrado.\n---------------------------");
-							return user;
+							return gu.autenticar(entradaL, entradaS);
+							
 						}catch (UsuarioSenhaErradoException e) {
-							e.getMsg();
+							e.getMsg(); // Essa Exception já é lançada dentro do metodo autenticar da GU
 						}
 					}
 				}else{
