@@ -32,12 +32,13 @@ public class GerenciadorDeUsuarios {
 			throws UsuarioSenhaErradoException {
 		Usuario usuario = null;
 		for (Usuario u : usuarios)
-			if (u.getLogin().equals(entradaL))
-				if (!u.getSenha().equals(entradaS))
-					throw new UsuarioSenhaErradoException();
-				else
+			if (u.getLogin().equals(entradaL) && !u.getSenha().equals(entradaS) || !u.getLogin().equals(entradaL)){
+				throw new UsuarioSenhaErradoException(); // Não está lancando a Exception
+			}else{
 					usuario = u;
-					return usuario;
+					System.out.println("Usuário encontrado.\n---------------------------");
+			}
+		return usuario;
 	}
 
 }
