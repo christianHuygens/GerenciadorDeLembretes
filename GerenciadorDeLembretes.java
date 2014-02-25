@@ -20,7 +20,7 @@ public class GerenciadorDeLembretes {
 	int numLog = 0;
 	String entradaL, entradaS;
 	
-	public void iniciar() {
+		public void iniciar() {
 		
 		System.out.println("BEM VINDO AO GERENCIADOR DE LEMBRETES!");
 		while (true) {
@@ -29,11 +29,11 @@ public class GerenciadorDeLembretes {
 
 			switch (op) {
 			case 1:
-				user = autenticar();
+				user = this.autenticar();
 				break;
 				
 			case 2:
-				user = novoUsuario;
+				user = this.cadastrarUsuario();
 				break;
 
 			default:
