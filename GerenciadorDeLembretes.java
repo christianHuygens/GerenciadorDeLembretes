@@ -15,8 +15,7 @@ public class GerenciadorDeLembretes {
 	GerenciadorDeUsuarios gu = new GerenciadorDeUsuarios();
 	Usuario user;
 	Usuario novoUsuario;
-	int op, usuario;
-	boolean senhaUsuario;
+	int op;
 	int numLog = 0;
 	String entradaL, entradaS;
 	
@@ -61,9 +60,46 @@ public class GerenciadorDeLembretes {
 			private void menu() {
 				System.out.println("MENU:\nDigite o numero da operação de deseja realizar:\n 1 - Inserir lembrete;\n 2 - Pesquisar por dia;\n 3 - Pesquisar por mês;\n 4 - Deletar usuário;\n 5 - Fazer logout.");
 				op = sc.nextInt();
+				switch (op) {
+				case 1:
+					inserirLembrete();
+					break;
+
+				case 2:
+					pesquisarDia();
+					break;
+				case 3:
+					pesquisarMes();
+					break;
+				case 4:
+					gu.deletarUsuario(user);
+					break;
+				case 5:
+					
+					break;
+				default:
+					System.out.println("Operação inválida. Digite novamente.\n---------------------------");
+					break;
+				}
 
 		
 	}
+
+
+			private void inserirLembrete() {
+				
+				
+			}
+
+			private void pesquisarDia() {
+				
+				
+			}
+			
+			private void pesquisarMes() {
+				
+				
+			}
 
 
 			private Usuario autenticar(){
