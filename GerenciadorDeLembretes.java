@@ -50,41 +50,50 @@ public class GerenciadorDeLembretes {
 			
 			
 	private void paginaInicial(Usuario user){
-		System.out.println("Olá "+ user.getLogin() + ".\nEsses são todos os seus lembretes.");
-		// Imprima todos os lembretes do usuário
-		System.out.println("Digite o número do lembrete para visualizar seus detalhes.\nOu digite '0' para acessar outras funções:");
-		op = sc.nextInt();
-		if (op == 0){
-			this.menu();
-		}
-		
+
+			System.out.println("Olá "+ user.getLogin() + ".\nEsses são todos os seus lembretes.");
+			// Imprima todos os lembretes do usuário
+			System.out.println("Digite o número do lembrete para visualizar seus detalhes.\nOu digite '0' para acessar outras funções:");
+			op = sc.nextInt();
+			if (op == 0){
+				this.menu();
+			}
+
 	}
 			
 			
 			private void menu() {
-				System.out.println("MENU:\nDigite o numero da operação de deseja realizar:\n 1 - Inserir lembrete;\n 2 - Pesquisar por dia;\n 3 - Pesquisar por mês;\n 4 - Deletar usuário;\n 5 - Fazer logout.");
-				op = sc.nextInt();
-				switch (op) {
-				case 1:
-					inserirLembrete();
-					break;
-
-				case 2:
-					pesquisarDia();
-					break;
-				case 3:
-					pesquisarMes();
-					break;
-				case 4:
-					gu.deletarUsuario(user);
-					numLog--;
-					break;
-				case 5:
-					
-					break;
-				default:
-					System.out.println("Operação inválida. Digite novamente.\n---------------------------");
-					break;
+				while(true){
+					System.out.println("MENU:\nDigite o numero da operação de deseja realizar:\n 1 - Inserir lembrete;\n 2 - Pesquisar por dia;\n 3 - Pesquisar por mês;\n 4 - Deletar usuário;\n 5 - Fazer logout.");
+					op = sc.nextInt();
+					switch (op) {
+						case 1:
+							inserirLembrete();
+							break;
+		
+						case 2:
+							pesquisarDia();
+							break;
+						case 3:
+							pesquisarMes();
+							break;
+						case 4:
+							gu.deletarUsuario(user);
+							numLog--;
+							break;
+						case 5:
+							break;
+						case 6: 
+							paginaInicial(user); // Há outra forma de voltar para a paginaInicial?
+							break;
+							
+						default:
+							System.out.println("Operação inválida. Digite novamente.\n---------------------------");
+							break;
+					}
+					if (op == 5 || op == 4) { // para sair do usuario caso ele realize logout, ou delete o usuario.
+						break;
+					}
 				}
 
 		
@@ -126,7 +135,7 @@ public class GerenciadorDeLembretes {
 						Notas tarefa = new Tarefas(titulo, expData, tag);
 						System.out.println("titulo, expData, tag"); // Para testar os ifs
 					}
-					user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
+					//user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
 					// numeroDeLembretes++
 
 				} else if (op == 2) {
@@ -151,7 +160,7 @@ public class GerenciadorDeLembretes {
 						Notas lembrete = new Lembretes(titulo, tag);
 						System.out.println("titulo, tag"); // Para testar os ifs
 					}
-					user.setArrayList(lembrete); // Se Lembretes herda de Notas, pq não funcionou?
+					//user.setArrayList(lembrete); // Se Lembretes herda de Notas, pq não funcionou?
 					// numeroDeLembretes++
 				}
 				
@@ -180,7 +189,6 @@ public class GerenciadorDeLembretes {
 							System.out.println("Digite a sua senha:");
 							entradaS = sc.next();
 							autenticado = gu.autenticar(entradaL, entradaS);
-							arrayListAutenticado = user.getArrayList(autenticado); // para associar o usuario a sua lista.
 							return autenticado;
 							
 						}catch (UsuarioSenhaErradoException e) {
@@ -450,4 +458,3 @@ public class GerenciadorDeLembretes {
 //}
 //
 //}
-
