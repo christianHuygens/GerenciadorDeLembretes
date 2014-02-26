@@ -9,6 +9,7 @@ public class GerenciadorDeUsuarios {
 
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
+
 	public void cadastrar(Usuario usuario) throws UsuarioExistenteException {
 		if (checarNomes(usuario.getLogin())) {
 			throw new UsuarioExistenteException();
@@ -45,10 +46,11 @@ public class GerenciadorDeUsuarios {
 	public void deletarUsuario(Usuario user){
 		for (Usuario u : usuarios)
 			if (u.getLogin().equals(user.getLogin())){
+				System.out.println("Usuário "+user.getLogin()+" removido com sucesso.\n---------------------------");
 				usuarios.remove(u); // Não funcionou.
 			}						
-		System.out.println("Usuário "+user.getLogin()+" removido com sucesso.\n---------------------------");
 	}
+	
 	
 }
 
