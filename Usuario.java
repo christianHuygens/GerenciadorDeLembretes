@@ -1,13 +1,17 @@
 package ifrn.poo.projetoLembretes;
 
+import java.util.ArrayList;
+
 public class Usuario {
 
 	private String login;
 	private String senha;
+	private ArrayList<Notas> arrayDeNotas;
 	
 	public Usuario(String entradaL, String entradaS){
 		this.login = entradaL;
 		this.senha = entradaS;
+		arrayDeNotas = new ArrayList<Notas>();
 	}
 	
 	public String getLogin() {
@@ -23,4 +27,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public ArrayList<Notas> getArrayList(Usuario user){
+		return this.arrayDeNotas;
+	}
+	
+	public void setArrayList(Notas nota){
+		this.arrayDeNotas.add(nota); // E a ordem por data?
+	}
+	
 }
+
