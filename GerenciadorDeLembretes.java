@@ -3,9 +3,11 @@ package ifrn.poo.projetoLembretes;
 import ifrn.poo.excecao.UsuarioExistenteException;
 import ifrn.poo.excecao.UsuarioSenhaErradoException;
 
+
+import java.util.ArrayList;
 //import java.lang.invoke.SwitchPoint;
 import java.util.Scanner;
-//import java.util.Date;
+import java.util.Date;
 import java.util.Calendar;
 
 public class GerenciadorDeLembretes {
@@ -13,7 +15,9 @@ public class GerenciadorDeLembretes {
 	Scanner sc = new Scanner(System.in);
 	Calendar calendario = Calendar.getInstance();
 	GerenciadorDeUsuarios gu = new GerenciadorDeUsuarios();
+	ArrayList<Notas> arrayListAutenticado; // para associar o usuario a sua lista.
 	Usuario user;
+	Usuario autenticado;
 	Usuario novoUsuario;
 	int op;
 	int numLog = 0;
@@ -73,6 +77,7 @@ public class GerenciadorDeLembretes {
 					break;
 				case 4:
 					gu.deletarUsuario(user);
+					numLog--;
 					break;
 				case 5:
 					
@@ -87,7 +92,68 @@ public class GerenciadorDeLembretes {
 
 
 			private void inserirLembrete() {
-				
+				System.out.println("Este lembrete possui data de expiração?\n(Digite '1' se houver ou '2' se não houver)");
+				op = sc.nextInt();
+				if (op == 1) {
+					System.out.println("Digite o título da tarefa: ");
+					String titulo = sc.next();
+					System.out.println("Digite o data de expiração dessa tarefa (em número): ");
+					System.out.print("Dia: ");
+					int dia = sc.nextInt();
+					System.out.print("Mês: ");
+					int mes = sc.nextInt();
+					System.out.print("Ano: ");
+					int ano = sc.nextInt();
+					calendario.set(ano, (mes - 1), dia); // (mes-1) pq o metodo set recebe os meses de 0 a 11 (jan .. dez)
+					Date expData = calendario.getTime();
+					System.out.println("Digite a descrição dessa tarefa (Ou digite 'n' caso não haja descrição): ");
+					String descricao = sc.next();
+					System.out.println("Digite um local para essa tarefa (Ou digite 'n' caso não haja local): ");
+					String local = sc.next();
+					System.out.println("Digite ums tag para essa tarefa: ");
+					String tag = sc.next();
+
+					if (!descricao.equals("n") && !local.equals("n")) {
+						Notas tarefa = new Tarefas(titulo, expData, tag, descricao, local);
+						System.out.println("titulo, expData, tag, descricao, local"); // Para testar os ifs
+					} else if (descricao.equals("n") && !local.equals("n")) {
+						Notas tarefa = new Tarefas(titulo, expData, tag, local);
+						System.out.println("titulo, expData, tag, local"); // Para testar os ifs
+					} else if (!descricao.equals("n") && local.equals("n")) {
+						Notas tarefa = new Tarefas(titulo, expData, tag, descricao);
+						System.out.println("titulo, expData, tag, descricao"); // Para testar os ifs
+					} else if (descricao.equals("n") && local.equals("n")) {
+						Notas tarefa = new Tarefas(titulo, expData, tag);
+						System.out.println("titulo, expData, tag"); // Para testar os ifs
+					}
+					user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
+					// numeroDeLembretes++
+
+				} else if (op == 2) {
+					System.out.println("Digite o título da tarefa:");
+					String titulo = sc.next();
+					System.out.println("Digite a descrição dessa tarefa (Ou digite 'n' caso não haja descrição): ");
+					String descricao = sc.next();
+					System.out.println("Digite um local para essa tarefa (Ou digite 'n' caso não haja local): ");
+					String local = sc.next();
+					System.out.println("Digite ums tag para essa tarefa: ");
+					String tag = sc.next();
+					if (!descricao.equals("n") && !local.equals("n")) {
+						Notas lembrete = new Lembretes(titulo, tag, descricao, local);
+						System.out.println("titulo, tag, descricao, local"); // Para testar os ifs
+					} else if (descricao.equals("n") && !local.equals("n")) {
+						Notas lembrete = new Lembretes(titulo, tag, local);
+						System.out.println("titulo, tag, local"); // Para testar os ifs
+					} else if (!descricao.equals("n") && local.equals("n")) {
+						Notas lembrete = new Lembretes(titulo, tag, descricao);
+						System.out.println("titulo, tag, descricao"); // Para testar os ifs
+					} else if (descricao.equals("n") && local.equals("n")) {
+						Notas lembrete = new Lembretes(titulo, tag);
+						System.out.println("titulo, tag"); // Para testar os ifs
+					}
+					user.setArrayList(lembrete); // Se Lembretes herda de Notas, pq não funcionou?
+					// numeroDeLembretes++
+				}
 				
 			}
 
@@ -113,7 +179,9 @@ public class GerenciadorDeLembretes {
 							}
 							System.out.println("Digite a sua senha:");
 							entradaS = sc.next();
-							return gu.autenticar(entradaL, entradaS);
+							autenticado = gu.autenticar(entradaL, entradaS);
+							arrayListAutenticado = user.getArrayList(autenticado); // para associar o usuario a sua lista.
+							return autenticado;
 							
 						}catch (UsuarioSenhaErradoException e) {
 							e.getMsg(); // Essa Exception já é lançada dentro do metodo autenticar da GU
