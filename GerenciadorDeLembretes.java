@@ -14,91 +14,8 @@ public class GerenciadorDeLembretes {
 
 	Scanner sc = new Scanner(System.in);
 	Calendar calendario = Calendar.getInstance();
-	GerenciadorDeUsuarios gu = new GerenciadorDeUsuarios();
 	ArrayList<Notas> arrayListAutenticado; // para associar o usuario a sua lista.
-	Usuario user;
-	Usuario autenticado;
-	Usuario novoUsuario;
 	int op;
-	int numLog = 0;
-	String entradaL, entradaS;
-	
-	public void iniciar() {
-		
-		System.out.println("BEM VINDO AO GERENCIADOR DE LEMBRETES!");
-		while (true) {
-			System.out.println("Digite a operação que deseja realizar:\n 1 - Para realizar login.\n 2 - Para criar um login.");
-			op = sc.nextInt();
-
-			switch (op) {
-			case 1:
-				user = this.autenticar();
-				if (user != null){
-					paginaInicial(user);
-				}
-				break;
-				
-			case 2:
-				this.cadastrarUsuario();
-				break;
-
-			default:
-				break;
-			}
-		}
-	}
-			
-			
-	private void paginaInicial(Usuario user){
-
-			System.out.println("Olá "+ user.getLogin() + ".\nEsses são todos os seus lembretes.");
-			// Imprima todos os lembretes do usuário
-			System.out.println("Digite o número do lembrete para visualizar seus detalhes.\nOu digite '0' para acessar outras funções:");
-			op = sc.nextInt();
-			if (op == 0){
-				this.menu();
-			}
-
-	}
-			
-			
-			private void menu() {
-				while(true){
-					System.out.println("MENU:\nDigite o numero da operação de deseja realizar:\n 1 - Inserir lembrete;\n 2 - Pesquisar por dia;\n 3 - Pesquisar por mês;\n 4 - Deletar usuário;\n 5 - Fazer logout.");
-					op = sc.nextInt();
-					switch (op) {
-						case 1:
-							inserirLembrete();
-							break;
-		
-						case 2:
-							pesquisarDia();
-							break;
-						case 3:
-							pesquisarMes();
-							break;
-						case 4:
-							gu.deletarUsuario(user);
-							numLog--;
-							break;
-						case 5:
-							break;
-						case 6: 
-							paginaInicial(user); // Há outra forma de voltar para a paginaInicial?
-							break;
-							
-						default:
-							System.out.println("Operação inválida. Digite novamente.\n---------------------------");
-							break;
-					}
-					if (op == 5 || op == 4) { // para sair do usuario caso ele realize logout, ou delete o usuario.
-						break;
-					}
-				}
-
-		
-	}
-
 
 			private void inserirLembrete() {
 				System.out.println("Este lembrete possui data de expiração?\n(Digite '1' se houver ou '2' se não houver)");
@@ -135,7 +52,7 @@ public class GerenciadorDeLembretes {
 						Notas tarefa = new Tarefas(titulo, expData, tag);
 						System.out.println("titulo, expData, tag"); // Para testar os ifs
 					}
-					//user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
+					user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
 					// numeroDeLembretes++
 
 				} else if (op == 2) {
@@ -176,67 +93,6 @@ public class GerenciadorDeLembretes {
 				
 			}
 
-
-			private Usuario autenticar(){
-				if(!gu.isEmpty()){
-					while(true){
-						try {
-							System.out.println("Digite seu login (ou digite 'n' para sair):");
-							entradaL = sc.next();
-							if (entradaL.equals('n')){
-								return null; // se retornar null, tem que voltar para o menu inicial.
-							}
-							System.out.println("Digite a sua senha:");
-							entradaS = sc.next();
-							autenticado = gu.autenticar(entradaL, entradaS);
-							return autenticado;
-							
-						}catch (UsuarioSenhaErradoException e) {
-							e.getMsg(); // Essa Exception já é lançada dentro do metodo autenticar da GU
-						}
-					}
-				}else{
-					System.out.println("Não há usuários cadastrados.\n---------------------------");
-					return null;
-				}
-			}
-		
-		private void cadastrarUsuario(){
-			if (numLog < 51) {
-				boolean criou = false;
-				while(!criou){
-					try {
-						System.out.println("Digite o login que deseja utilizar:");
-						entradaL = sc.next();
-						if (!gu.checarNomes(entradaL)) {
-							System.out.println("Digite a sua senha:");
-							entradaS = sc.next();
-							novoUsuario = new Usuario(entradaL, entradaS);
-							System.out.println("Usuário '"+ entradaL+ "' cadastrado com sucesso.\n---------------------------");
-							gu.cadastrar(novoUsuario);
-						}
-						criou = true;
-						numLog++;
-					} catch (UsuarioExistenteException e) {
-						e.getMsg();
-					}
-				}
-
-			} else {
-				System.out.println("Não há mais espaço para usuários nesse aplicativo. Delete algum usuário para continuar.");
-			}
-		}
-			
-			
-			
-			
-			
-			
-			
-			
-
-
-	
 	
 	
 }
