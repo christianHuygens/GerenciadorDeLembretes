@@ -1,7 +1,5 @@
 package ifrn.poo.projetoLembretes;
 
-import ifrn.poo.excecao.UsuarioExistenteException;
-import ifrn.poo.excecao.UsuarioSenhaErradoException;
 
 import java.util.ArrayList;
 
@@ -10,12 +8,11 @@ public class GerenciadorDeUsuarios {
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 
-	public void cadastrar(Usuario usuario) throws UsuarioExistenteException {
-		if (checarNomes(usuario.getLogin())) {
-			throw new UsuarioExistenteException();
-		}
+	public void cadastrar(Usuario usuario) {
+		if (!this.checarNomes(usuario.getLogin())){
 		this.usuarios.add(usuario);
 		System.out.println("Usuário '"+ usuario.getLogin() + "' cadastrado com sucesso.\n---------------------------");
+		}
 	}
 
 	public boolean checarNomes(String nome) {
@@ -30,16 +27,21 @@ public class GerenciadorDeUsuarios {
 		return usuarios.isEmpty();
 	}
 
-	public Usuario autenticar(String entradaL, String entradaS)
-			throws UsuarioSenhaErradoException {
+	public Usuario autenticar(String entradaL, String entradaS){
 		Usuario usuario = null;
-		for (Usuario u : usuarios)
+		for (Usuario u : usuarios){
 			if (u.getLogin().equals(entradaL) && !u.getSenha().equals(entradaS) || !u.getLogin().equals(entradaL)){
-				throw new UsuarioSenhaErradoException(); // Não está lançando a Exception
+				usuario = null;
 			}else{
 					usuario = u;
 					System.out.println("Usuário encontrado.\n---------------------------");
+					return usuario;
 			}
+		}
+		if (usuario == null){
+			System.out.println("Usuário não encontrado.\n---------------------------");
+			}
+		
 		return usuario;
 	}
 
