@@ -14,6 +14,7 @@ public class GerenciadorDeNotas {
 		GerenciadorDeUsuarios gu = new GerenciadorDeUsuarios();
 		String op, entradaL, entradaS;
 		Usuario user, novoUsuario;
+		Notas tarefa= null, lembrete = null;
 		Calendar calendario = Calendar.getInstance();
 		int numLog = 0;
 		boolean status = false;
@@ -47,6 +48,7 @@ public class GerenciadorDeNotas {
 					while(status){
 						System.out.println("Olá "+user.getLogin()+"!\nEsses são todos os seus lembretes:");
 						//Imprimir lembretes
+						user.imprimeTodasNotas(user);
 						System.out.println("Digite o número do lembrete que deseja visualizar. Ou digite 'menu' para acessar outras funções:");
 						op = sc.next();
 						if (!op.equals("menu")){
@@ -62,7 +64,7 @@ public class GerenciadorDeNotas {
 								int op2 = sc.nextInt();
 								if (op2 == 1) {
 									System.out.println("Digite o título da tarefa: ");
-									String titulo = sc.next();
+									String titulo = sc.next(); // Dá erro no Scanner quando uso espaço.
 									System.out.println("Digite o data de expiração dessa tarefa (em número): ");
 									System.out.print("Dia: ");
 									int dia = sc.nextInt();
@@ -80,19 +82,19 @@ public class GerenciadorDeNotas {
 									String tag = sc.next();
 
 									if (!descricao.equals("n") && !local.equals("n")) {
-										Notas tarefa = new Tarefas(titulo, expData, tag, descricao, local);
+										tarefa = new Tarefas(titulo, expData, tag, descricao, local);
 										System.out.println("titulo, expData, tag, descricao, local"); // Para testar os ifs
 									} else if (descricao.equals("n") && !local.equals("n")) {
-										Notas tarefa = new Tarefas(titulo, expData, tag, local);
+										tarefa = new Tarefas(titulo, expData, tag, local);
 										System.out.println("titulo, expData, tag, local"); // Para testar os ifs
 									} else if (!descricao.equals("n") && local.equals("n")) {
-										Notas tarefa = new Tarefas(titulo, expData, tag, descricao);
+										tarefa = new Tarefas(titulo, expData, tag, descricao);
 										System.out.println("titulo, expData, tag, descricao"); // Para testar os ifs
 									} else if (descricao.equals("n") && local.equals("n")) {
-										Notas tarefa = new Tarefas(titulo, expData, tag);
+										tarefa = new Tarefas(titulo, expData, tag);
 										System.out.println("titulo, expData, tag"); // Para testar os ifs
 									}
-									//user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
+									user.setArrayList(tarefa); // Se Tarefas herda de Notas, pq não funcionou?
 									// numeroDeLembretes++
 
 								} else if (op2 == 2) {
@@ -105,19 +107,19 @@ public class GerenciadorDeNotas {
 									System.out.println("Digite ums tag para essa tarefa: ");
 									String tag = sc.next();
 									if (!descricao.equals("n") && !local.equals("n")) {
-										Notas lembrete = new Lembretes(titulo, tag, descricao, local);
+										lembrete = new Lembretes(titulo, tag, descricao, local);
 										System.out.println("titulo, tag, descricao, local"); // Para testar os ifs
 									} else if (descricao.equals("n") && !local.equals("n")) {
-										Notas lembrete = new Lembretes(titulo, tag, local);
+										lembrete = new Lembretes(titulo, tag, local);
 										System.out.println("titulo, tag, local"); // Para testar os ifs
 									} else if (!descricao.equals("n") && local.equals("n")) {
-										Notas lembrete = new Lembretes(titulo, tag, descricao);
+										lembrete = new Lembretes(titulo, tag, descricao);
 										System.out.println("titulo, tag, descricao"); // Para testar os ifs
 									} else if (descricao.equals("n") && local.equals("n")) {
-										Notas lembrete = new Lembretes(titulo, tag);
+										lembrete = new Lembretes(titulo, tag);
 										System.out.println("titulo, tag"); // Para testar os ifs
 									}
-									//user.setArrayList(lembrete); // Se Lembretes herda de Notas, pq não funcionou?
+									user.setArrayList(lembrete); // Se Lembretes herda de Notas, pq não funcionou?
 									// numeroDeLembretes++
 								}
 								
