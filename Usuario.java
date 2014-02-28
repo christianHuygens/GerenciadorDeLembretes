@@ -35,5 +35,13 @@ public class Usuario {
 		this.arrayDeNotas.add(nota); // E a ordem por data?
 	}
 	
+	public void imprimeTodasNotas(Usuario user){
+		int indNota = 0;
+		for (Notas n : arrayDeNotas) {
+			indNota++;
+			System.out.println(indNota+" - Criada em:"+n.getDataCriação()+" - "+n.getTitulo());
+		}
+	}
+	
 }
 
