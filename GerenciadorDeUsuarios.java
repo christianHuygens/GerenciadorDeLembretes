@@ -15,6 +15,7 @@ public class GerenciadorDeUsuarios {
 			throw new UsuarioExistenteException();
 		}
 		this.usuarios.add(usuario);
+		System.out.println("Usuário '"+ usuario.getLogin() + "' cadastrado com sucesso.\n---------------------------");
 	}
 
 	public boolean checarNomes(String nome) {
@@ -44,11 +45,15 @@ public class GerenciadorDeUsuarios {
 
 	
 	public void deletarUsuario(Usuario user){
-		for (Usuario u : usuarios)
+		int cont = 0;
+		for (Usuario u : usuarios){
 			if (u.getLogin().equals(user.getLogin())){
+				
 				System.out.println("Usuário "+user.getLogin()+" removido com sucesso.\n---------------------------");
-				usuarios.remove(u); // Não funcionou.
-			}						
+				usuarios.remove(cont);
+			}		
+		cont++;
+		}
 	}
 	
 	
